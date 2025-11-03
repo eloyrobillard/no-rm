@@ -17,6 +17,11 @@ should_not_be_empty() {
   fi
 }
 
+test() {
+  touch $1
+  "$2" $(./a.out $3)
+}
+
 make main
 
 touch ~/path
