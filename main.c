@@ -17,18 +17,19 @@ int main(int argc, char *argv[]) {
   strcat(cmd, "gio trash ");
 
   for (int i = 1; i < argc; i++) {
-    if (strcmp(argv[i], "--version") == 0) {
+    if ((strcmp(argv[i], "-i") && strcmp(argv[i], "-I") &&
+         strncmp(argv[i], "--interactive", 13) &&
+         strcmp(argv[i], "--one-file-system") &&
+         strcmp(argv[i], "--no-preserve-root") &&
+         strncmp(argv[i], "--preserve-root", 15) && strcmp(argv[i], "-r") &&
+         strcmp(argv[i], "-R") && strcmp(argv[i], "--recursive") &&
+         strcmp(argv[i], "-d") && strcmp(argv[i], "--dir") &&
+         strcmp(argv[i], "-v") && strcmp(argv[i], "--verbose")) == 0) {
+      // skip options that rm supports but gio trash doesn't
+      continue;
+    } else if (strcmp(argv[i], "--version") == 0) {
       cmd = "gio --version";
       break;
-    } else if (strcmp(argv[i], "--force") == 0) {
-      strcat(&cmd[end], "-f ");
-      end += 3;
-    } else if (strcmp(argv[i], "-f") == 0) {
-      strcat(&cmd[end], "-f ");
-      end += 3;
-    } else if (argv[i][0] != '-') {
-      strcat(strcat(&cmd[end], argv[i]), " ");
-      end += strlen(argv[i]) + 1;
     } else if (strcmp(argv[i], "--") == 0) {
       for (int ii = i + 1; ii < argc; ii++) {
         if (argv[ii][0] == '-') {
@@ -41,6 +42,9 @@ int main(int argc, char *argv[]) {
       }
 
       break;
+    } else {
+      strcat(strcat(&cmd[end], argv[i]), " ");
+      end += strlen(argv[i]) + 1;
     }
   }
 

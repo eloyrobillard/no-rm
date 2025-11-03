@@ -40,7 +40,7 @@ out=$(./a.out path -i -I --interactive=never -r -R --recursive --one-file-system
 should_be_empty "$out"
 
 touch path
-out=$(./a.out path --fake-option -foo)
+out=$(./a.out path --fake-option -foo 2>&1)
 should_not_be_empty "$out"
 
 out=$(./a.out --version)
