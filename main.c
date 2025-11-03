@@ -43,6 +43,12 @@ int main(int argc, char *argv[]) {
 
       break;
     } else {
+      char *p = argv[i];
+      while (*p && *p != ' ')
+        p++;
+      if (*p == ' ')
+        strcat(strcat("\"", argv[i]), "\"");
+
       strcat(strcat(&cmd[end], argv[i]), " ");
       end += strlen(argv[i]) + 1;
     }
