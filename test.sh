@@ -34,6 +34,23 @@ test_file_trashed() {
   done
 }
 
+test_file_not_trashed() {
+  declare -n arr=$1
+  declare -n arr2=$3
+
+  for FILE in "${arr[@]}"; do
+    touch "$FILE"
+  done
+
+  "$2" "$(./a.out "${arr2[@]}")"
+
+  for FILE in "${arr[@]}"; do
+    if [ ! -f "$FILE" ]; then
+        echo "エラー：$FILE は削除されました。"
+    fi
+  done
+}
+
 make main
 
 a=("$HOME/path" "path2")
@@ -58,7 +75,8 @@ a2=("path" "-i" "-I" "--interactive=never" "-r" "-R" "--recursive" "--one-file-s
 test_file_trashed a should_be_empty a2
 
 a2=("path" "--fake-option" "2>&1")
-test a should_not_be_empty a2
+test_file_not_trashed a should_not_be_empty a2
+gio trash path
 
 out=$(./a.out --version)
 should_not_be_empty "$out"
