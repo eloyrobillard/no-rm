@@ -60,7 +60,6 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  // printf("%d %s\n", argc, cmd);
   system(cmd);
 
   return 0;
