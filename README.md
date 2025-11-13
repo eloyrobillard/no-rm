@@ -1,8 +1,8 @@
-# No `rm`
+# Remove `rm` for your own safety
 
 ## The why
 
-This whole project started when I tried installing a package using `cd ~ && make install`, only to realise one of the lines was `rm . -rf`. And just like that `$HOME` was gone.
+This whole project started when I tried installing a package using `cd ~ && make install`, only to realise one of the lines was `rm . -rf`. And just like that `$HOME` was gone, and every important file I had with it.
 
 `rm` is not a very good command for a number of reasons:
 
@@ -12,7 +12,7 @@ This whole project started when I tried installing a package using `cd ~ && make
 
 These are the same issues it has had since its birth, in *1971*. Those same issues were *reimplemented* by the GNU crew when they re-wrote UNIX as free soft.
 
-The MAN page idiotically mentions my second issue above in the following terms:
+The MAN page kindly mentions the second issue above in the MAN page:
 
 ```
 To remove a file whose name starts with a '-', for example '-foo', use one of these commands:
@@ -20,7 +20,7 @@ To remove a file whose name starts with a '-', for example '-foo', use one of th
               rm ./-foo
 ```
 
-One might wonder how long a fix for this bug would take, as opposed to writing those lines in the first place.
+One might wonder how much longer writing a fix for this bug would take than it did writing this explanation.
 
 ## The how
 
