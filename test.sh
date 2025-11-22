@@ -63,7 +63,7 @@ a=("pa  th")
 test_file_trashed a should_be_empty a
 
 a=("path" "path2")
-a2=("path" "-f" "--force" "path2")
+a2=("path" "-rf" "--force" "path2")
 test_file_trashed a should_be_empty a2
 
 a=("path" "$HOME/path2" "./-foo" "path3")
